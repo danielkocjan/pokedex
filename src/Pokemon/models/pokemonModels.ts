@@ -6,5 +6,8 @@ export interface Pokemon extends Name {
 
 export interface PokemonData extends Name {
     id: number;
+    sprites: {
+        frontDefault: string;
+    };
     // todo: types for abilities, moves, species, stats, types
 }

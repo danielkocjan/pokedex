@@ -1,8 +1,8 @@
-import { PokemonAction } from '../../Pokemon/actions/pokemonActions';
+import { PokemonAction } from '../../Pokemon/reducers/pokemonReducer';
 
 export interface Action<T, P = null> {
-    readonly type: T;
-    readonly payload?: P;
+    type: T;
+    payload: P;
 }
 
 export type AppAction = PokemonAction;
