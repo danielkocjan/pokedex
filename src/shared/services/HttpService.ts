@@ -15,6 +15,6 @@ export class HttpService {
     private async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
         const response = await this.api.request<T>(config);
 
-        return (camelcaseKeys(response.data) as unknown) as T; // lib types are poor
+        return (camelcaseKeys(response.data, { deep: true }) as unknown) as T; // lib types are poor
     }
 }

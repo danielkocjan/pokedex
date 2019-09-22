@@ -1,5 +1,5 @@
 import { HttpService } from '../../shared/services/HttpService';
-import { Pokemon } from '../models/pokemonModels';
+import { Pokemon, PokemonData } from '../models/pokemonModels';
 import { PaginatedResponse } from '../../shared/models/httpModels';
 import { Resource } from '../../shared/config/apiConfig';
 
@@ -11,6 +11,6 @@ export class PokemonService {
     }
 
     public getPokemonData(pokemonUrl: string) {
-        return this.http.get<Pokemon>(pokemonUrl);
+        return this.http.get<PokemonData>(`${Resource.Pokemon}${pokemonUrl}`);
     }
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback } from 'react';
-// import { useSelector } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { pokemonService } from '../../shared/services/rootService';
 import * as actions from '../actions/getPokemonsActions';
-import { pokemonsPaginationSelector } from '../selectors/pokemonSelectors';
+import { pokemonsPaginationSelector, isFetchingSelector } from '../selectors/pokemonSelectors';
+import { getPokemonSpriteByUrl, capitalize } from '../../shared/helpers/helpers';
+import { Link } from 'react-router-dom';
 
 export const Pokemons: React.FC = () => {
     const dispatch = useDispatch();
@@ -23,11 +24,19 @@ export const Pokemons: React.FC = () => {
     }, [getPokemons]);
 
     const pagination = useSelector(pokemonsPaginationSelector);
+    const isFetching = useSelector(isFetchingSelector);
 
-    return (
+    return isFetching ? (
+        <div>Loading...</div>
+    ) : (
         <div>
-            {pagination.results.map(poke => (
-                <li key={poke.url}>{poke.name}</li>
+            {pagination.results.map(({ url, name }) => (
+                <Link key={url} to={`/pokemon/${name}`}>
+                    <div>
+                        <img src={getPokemonSpriteByUrl(url)} alt={name} />
+                        {capitalize(name)}
+                    </div>
+                </Link>
             ))}
         </div>
     );
