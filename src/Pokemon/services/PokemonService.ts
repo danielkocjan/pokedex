@@ -6,11 +6,12 @@ import { Resource } from '../../shared/config/apiConfig';
 export class PokemonService {
     constructor(private readonly http: HttpService) {}
 
-    public getPokemons() {
-        return this.http.get<PaginatedResponse<Pokemon>>(Resource.Pokemon);
+    public getPokemons(page: number) {
+        const url = `${Resource.Pokemon}${this.http.paginationParams(page)}`;
+        return this.http.get<PaginatedResponse<Pokemon>>(url);
     }
 
-    public getPokemonData(pokemonUrl: string) {
-        return this.http.get<PokemonData>(`${Resource.Pokemon}${pokemonUrl}`);
+    public getPokemonData(pokemonName: string) {
+        return this.http.get<PokemonData>(`${Resource.Pokemon}/${pokemonName}`);
     }
 }

@@ -1,11 +1,10 @@
-import { PokemonData, Pokemon } from '../models/pokemonModels';
+import { PokemonData, PokemonPagination } from '../models/pokemonModels';
 import { AppAction } from '../../shared/models/appAction';
-import { PaginatedResponse } from '../../shared/models/httpModels';
 import * as getPokemons from '../actions/getPokemonsActions';
 import * as getPokemonData from '../actions/getPokemonDataActions';
 
 export interface PokemonState {
-    pagination: PaginatedResponse<Pokemon>;
+    pagination: PokemonPagination;
     pokemonsData: PokemonData[];
     isFetching: boolean;
 }
@@ -13,6 +12,7 @@ export interface PokemonState {
 const initialState: PokemonState = {
     pagination: {
         count: 0,
+        page: 1,
         results: [],
     },
     pokemonsData: [],
@@ -32,7 +32,7 @@ export const pokemonReducer = (state = initialState, action: AppAction) => {
         case getPokemons.GET_POKEMONS_SUCCESS:
             return {
                 ...state,
-                pagination: action.payload,
+                pagination: { ...state.pagination, ...action.payload },
                 isFetching: false,
             };
 
@@ -40,6 +40,18 @@ export const pokemonReducer = (state = initialState, action: AppAction) => {
             return {
                 ...state,
                 isFetching: false,
+            };
+
+        case getPokemons.SET_NEXT_PAGE:
+            return {
+                ...state,
+                pagination: { ...state.pagination, page: state.pagination.page + 1 },
+            };
+
+        case getPokemons.SET_PREVIOUS_PAGE:
+            return {
+                ...state,
+                pagination: { ...state.pagination, page: state.pagination.page - 1 },
             };
 
         case getPokemonData.GET_POKEMON_DATA_REQUEST:

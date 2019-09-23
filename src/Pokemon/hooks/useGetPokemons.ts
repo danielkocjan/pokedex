@@ -3,26 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../actions/getPokemonsActions';
 import { pokemonService } from '../../shared/services/rootService';
-import { isFetchingSelector, pokemonsPaginationSelector } from '../selectors/pokemonSelectors';
+import {
+    isFetchingSelector,
+    pokemonsResultsSelector,
+    pokemonsPageSelector,
+} from '../selectors/pokemonSelectors';
 
 export const useGetPokemons = () => {
     const dispatch = useDispatch();
+
+    const page = useSelector(pokemonsPageSelector);
 
     const getPokemons = useCallback(() => {
         dispatch(actions.getPokemonsRequest());
 
         return pokemonService
-            .getPokemons()
+            .getPokemons(page)
             .then(pokemons => dispatch(actions.getPokemonsSuccess(pokemons)))
             .catch(() => dispatch(actions.getPokemonsFailure()));
-    }, [dispatch]);
+    }, [dispatch, page]);
 
     useEffect(() => {
         getPokemons();
-    }, [getPokemons]);
+    }, [page, getPokemons]);
 
-    const pagination = useSelector(pokemonsPaginationSelector);
+    const pokemons = useSelector(pokemonsResultsSelector);
     const isFetching = useSelector(isFetchingSelector);
 
-    return { pagination, isFetching };
+    return { pokemons, isFetching, page };
 };

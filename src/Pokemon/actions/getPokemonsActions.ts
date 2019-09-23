@@ -21,4 +21,21 @@ export const getPokemonsFailure = () => ({
     type: GET_POKEMONS_FAILURE,
 });
 
-export type GetPokemonsActions = GetPokemonsRequest | GetPokemonsSuccess | GetPokemonsFailure;
+export const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
+type SetNextPage = Action<typeof SET_NEXT_PAGE>;
+export const setNextPage = () => ({
+    type: SET_NEXT_PAGE,
+});
+
+export const SET_PREVIOUS_PAGE = 'SET_PREVIOUS_PAGE';
+type SetPreviousPage = Action<typeof SET_PREVIOUS_PAGE>;
+export const setPreviousPage = () => ({
+    type: SET_PREVIOUS_PAGE,
+});
+
+export type GetPokemonsActions =
+    | GetPokemonsRequest
+    | GetPokemonsSuccess
+    | GetPokemonsFailure
+    | SetNextPage
+    | SetPreviousPage;

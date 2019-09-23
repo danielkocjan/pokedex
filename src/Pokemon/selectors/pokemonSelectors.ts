@@ -1,6 +1,12 @@
 import { AppState } from '../../shared/reducers/rootReducer';
+import { paginationLimit } from '../../shared/config/apiConfig';
 
-export const pokemonsPaginationSelector = ({ pokemon }: AppState) => pokemon.pagination;
+export const pokemonsResultsSelector = ({ pokemon }: AppState) => pokemon.pagination.results;
+
+export const pokemonsPageSelector = ({ pokemon }: AppState) => pokemon.pagination.page;
+
+export const isLastPageSelector = ({ pokemon }: AppState) =>
+    pokemon.pagination.page === Math.floor(pokemon.pagination.count / paginationLimit);
 
 export const isFetchingSelector = ({ pokemon }: AppState) => pokemon.isFetching;
 

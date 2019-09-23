@@ -1,4 +1,5 @@
 import { Name } from '../../shared/models/commonModels';
+import { PaginatedResponse } from '../../shared/models/httpModels';
 
 export interface Pokemon extends Name {
     url: string;
@@ -24,4 +25,8 @@ export interface PokemonData extends Name {
     };
     types: Type[];
     stats: Stat[];
+}
+
+export interface PokemonPagination extends PaginatedResponse<Pokemon> {
+    page: number;
 }

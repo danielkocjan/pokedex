@@ -7,7 +7,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### todo
 
--   debounced search input
--   pokemons name & pagination params
--   improve design
+-   improve UI
 -   unit tests
+-   absolute imports
