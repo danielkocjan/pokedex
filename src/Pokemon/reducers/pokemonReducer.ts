@@ -3,11 +3,10 @@ import { AppAction } from '../../shared/models/appAction';
 import { PaginatedResponse } from '../../shared/models/httpModels';
 import * as getPokemons from '../actions/getPokemonsActions';
 import * as getPokemonData from '../actions/getPokemonDataActions';
-import { GetPokemonsActions } from '../actions/getPokemonsActions';
 
 export interface PokemonState {
     pagination: PaginatedResponse<Pokemon>;
-    pokemons: PokemonData[];
+    pokemonsData: PokemonData[];
     isFetching: boolean;
 }
 
@@ -16,7 +15,7 @@ const initialState: PokemonState = {
         count: 0,
         results: [],
     },
-    pokemons: [],
+    pokemonsData: [],
     isFetching: false,
 };
 
@@ -52,7 +51,7 @@ export const pokemonReducer = (state = initialState, action: AppAction) => {
         case getPokemonData.GET_POKEMON_DATA_SUCCESS:
             return {
                 ...state,
-                pokemons: [...state.pokemons, action.payload],
+                pokemonsData: [...state.pokemonsData, action.payload],
                 isFetching: false,
             };
 

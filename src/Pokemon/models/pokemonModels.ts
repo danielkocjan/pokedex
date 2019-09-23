@@ -4,10 +4,24 @@ export interface Pokemon extends Name {
     url: string;
 }
 
+export interface Type {
+    type: {
+        name: string;
+    };
+}
+
+export interface Stat {
+    baseStat: number;
+    stat: {
+        name: string;
+    };
+}
+
 export interface PokemonData extends Name {
     id: number;
     sprites: {
         frontDefault: string;
     };
-    // todo: types for abilities, moves, species, stats, types
+    types: Type[];
+    stats: Stat[];
 }

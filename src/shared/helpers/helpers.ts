@@ -1,3 +1,5 @@
+import { Stat, Type } from '../../Pokemon/models/pokemonModels';
+
 export const getPokemonSpriteByUrl = (url: string) => {
     const matches = url.match(/\/pokemon\/(\d+)/);
 
@@ -6,9 +8,10 @@ export const getPokemonSpriteByUrl = (url: string) => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 };
 
-export const capitalize = (string: string) =>
-    string
-        .toLowerCase()
-        .split(' ')
-        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-        .join(' ');
+export const serializeStats = (stats: Stat[]) =>
+    stats.map(({ stat, baseStat }) => ({
+        name: stat.name,
+        value: baseStat,
+    }));
+
+export const serializeTypes = (types: Type[]) => types.map(({ type }) => type.name);

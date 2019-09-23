@@ -1,0 +1,32 @@
+.pokemon-types {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__type {
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: $white-color;
+        margin: 0 0.5rem;
+        box-shadow: 0 0.25rem 0.5rem 0 $shadow-color;
+    }
+}
+
+// todo type-color pairs, loop and map-get for dynamic type color styles
+[data-type='grass'] {
+    color: #159f6e;
+}
+
+[data-type='fire'] {
+    color: #e4362b;
+}
+
+[data-type='electricity'] {
+    color: yellow;
+}
+
+[data-type='water'] {
+    color: blue;
+}

@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+.pokemons {
+    &__input {
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+
+        &__name {
+            text-transform: capitalize;
+        }
+    }
+
+    &__card {
+        background: $white-color;
+        margin: 2rem;
+    }
+}

@@ -5,4 +5,4 @@ export const pokemonsPaginationSelector = ({ pokemon }: AppState) => pokemon.pag
 export const isFetchingSelector = ({ pokemon }: AppState) => pokemon.isFetching;
 
 export const pokemonDataSelector = ({ pokemon }: AppState, name: string) =>
-    pokemon.pokemons.find(poke => poke.name === name);
+    pokemon.pokemonsData.find(poke => poke.name === name);

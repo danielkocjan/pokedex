@@ -1,0 +1,41 @@
+@import './variables';
+
+.pokemon-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50rem;
+
+    box-shadow: 0 0.25rem 0.5rem 0 $shadow-color;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 6rem;
+    padding: 0 2rem;
+    background: $white-color;
+
+    &__header {
+        background: $pokeball-red-color;
+        border-bottom: 10px solid $border-color;
+        border-radius: 6rem 6rem 0 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    &__name {
+        text-transform: capitalize;
+    }
+}
+
+.pokemon-stats {
+    &__stat {
+        border-bottom: 1px solid $gray-color;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0;
+        text-transform: capitalize;
+    }
+}
