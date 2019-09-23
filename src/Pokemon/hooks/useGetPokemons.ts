@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../actions/getPokemonsActions';
 import { pokemonService } from '../../shared/services/rootService';
-import {
-    isFetchingSelector,
-    pokemonsResultsSelector,
-    pokemonsPageSelector,
-} from '../selectors/pokemonSelectors';
+import { pokemonsPageSelector } from '../selectors/pokemonSelectors';
 
 export const useGetPokemons = () => {
     const dispatch = useDispatch();
@@ -26,9 +22,4 @@ export const useGetPokemons = () => {
     useEffect(() => {
         getPokemons();
     }, [page, getPokemons]);
-
-    const pokemons = useSelector(pokemonsResultsSelector);
-    const isFetching = useSelector(isFetchingSelector);
-
-    return { pokemons, isFetching, page };
 };

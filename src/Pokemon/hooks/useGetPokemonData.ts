@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../actions/getPokemonDataActions';
 import { pokemonService } from '../../shared/services/rootService';
-import { pokemonDataSelector, isFetchingSelector } from '../selectors/pokemonSelectors';
+import { pokemonDataSelector } from '../selectors/pokemonSelectors';
 import { AppState } from '../../shared/reducers/rootReducer';
 
 export const useGetPokemonData = (name: string) => {
@@ -22,7 +22,6 @@ export const useGetPokemonData = (name: string) => {
     );
 
     const pokemon = useSelector((state: AppState) => pokemonDataSelector(state, name));
-    const isFetching = useSelector(isFetchingSelector);
 
     useEffect(() => {
         if (!pokemon) {
@@ -30,5 +29,5 @@ export const useGetPokemonData = (name: string) => {
         }
     }, [getPokemonData, name, pokemon]);
 
-    return { pokemon, isFetching };
+    return { pokemon };
 };

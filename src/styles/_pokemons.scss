@@ -1,20 +1,44 @@
 @import './variables.scss';
+@import './mixins.scss';
 
 .pokemons {
-    &__input {
-    }
+    max-width: 80rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
-    &__list {
+    &__card {
+        background: $white-color;
+        margin: 2rem;
+        border-radius: 1rem;
+        min-height: 7rem;
+        min-width: 15rem;
+
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        @include shadow;
 
         &__name {
             text-transform: capitalize;
         }
     }
 
-    &__card {
-        background: $white-color;
-        margin: 2rem;
+    &__pagination {
+        display: flex;
+        padding: 1.5rem;
+        justify-content: space-between;
+        align-items: center;
+
+        &__btn {
+            width: 6rem;
+            height: 3rem;
+
+            border-radius: 1rem;
+            border: none;
+
+            @include shadow;
+        }
     }
 }

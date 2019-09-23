@@ -6,37 +6,54 @@ import { getPokemonSpriteByUrl } from '../../shared/helpers/helpers';
 import { Spinner } from '../../shared/components/Spinner';
 import { useGetPokemons } from '../hooks/useGetPokemons';
 import { setNextPage, setPreviousPage } from '../actions/getPokemonsActions';
-import { isLastPageSelector } from '../selectors/pokemonSelectors';
+import {
+    isLastPageSelector,
+    pokemonsTotalPagesSelector,
+    pokemonsResultsSelector,
+    isFetchingSelector,
+    pokemonsPageSelector,
+} from '../selectors/pokemonSelectors';
 
 export const Pokemons: React.FC = () => {
-    const { pokemons, isFetching, page } = useGetPokemons();
+    useGetPokemons();
 
     const dispatch = useDispatch();
     const nextPage = () => dispatch(setNextPage());
     const previousPage = () => dispatch(setPreviousPage());
 
     const isLastPage = useSelector(isLastPageSelector);
+    const totalPages = useSelector(pokemonsTotalPagesSelector);
+    const pokemons = useSelector(pokemonsResultsSelector);
+    const isFetching = useSelector(isFetchingSelector);
+    const page = useSelector(pokemonsPageSelector);
 
     return isFetching ? (
         <Spinner />
     ) : (
-        <section className="pokemons">
-            <ul className="pokemons__list">
+        <section>
+            <main className="pokemons">
                 {pokemons.map(({ url, name }) => (
-                    <li key={url}>
-                        <Link to={`/pokemon/${name}`}>
-                            <img src={getPokemonSpriteByUrl(url)} alt={name} />
-                            <span className="pokemons__list__name">{name}</span>
-                        </Link>
-                    </li>
+                    <Link to={`/pokemon/${name}`} key={url} className="pokemons__card">
+                        <img src={getPokemonSpriteByUrl(url)} alt={name} />
+                        <span className="pokemons__card__name">{name}</span>
+                    </Link>
                 ))}
-            </ul>
+            </main>
 
             <div className="pokemons__pagination">
-                <button disabled={page === 1} onClick={previousPage}>
+                <button
+                    className="pokemons__pagination__btn"
+                    disabled={page === 1}
+                    onClick={previousPage}
+                >
                     Prev
                 </button>
-                <button disabled={isLastPage} onClick={nextPage}>
+                <span>{`${page} / ${totalPages}`}</span>
+                <button
+                    className="pokemons__pagination__btn"
+                    disabled={isLastPage}
+                    onClick={nextPage}
+                >
                     Next
                 </button>
             </div>

@@ -1,13 +1,24 @@
 .pokemon-stats {
-    padding: 0.5rem 0;
-
     &__stat {
-        border-bottom: 1px solid $gray-color;
-        width: 100%;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem 0;
-        text-transform: capitalize;
         display: flex;
         justify-content: space-between;
+        width: 100%;
+
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid $gray-color;
+        text-transform: capitalize;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &--key {
+            margin-right: 1rem;
+        }
+
+        &--value {
+            font-weight: $font-weight-bold;
+        }
     }
 }

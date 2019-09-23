@@ -6,11 +6,19 @@ import { PokemonTypes } from './PokemonTypes';
 import { PokemonStats } from './PokemonStats';
 import { useGetPokemonData } from '../hooks/useGetPokemonData';
 import { serializeStats, serializeTypes } from '../../shared/helpers/helpers';
+import { useSelector } from 'react-redux';
+import { pokemonDataSelector, isFetchingSelector } from '../selectors/pokemonSelectors';
+import { AppState } from '../../shared/reducers/rootReducer';
 
 type PokemonProps = RouteComponentProps<{ name: string }>;
 
 const PokemonContainer: React.FC<PokemonProps> = props => {
-    const { pokemon, isFetching } = useGetPokemonData(props.match.params.name);
+    const { name } = props.match.params;
+
+    useGetPokemonData(name);
+
+    const pokemon = useSelector((state: AppState) => pokemonDataSelector(state, name));
+    const isFetching = useSelector(isFetchingSelector);
 
     if (isFetching) {
         return <Spinner />;

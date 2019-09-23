@@ -12,12 +12,13 @@ const store = createStore(rootReducer);
 export const App: React.FC = () => (
     <Router>
         <Provider store={store}>
-            <div>Pokedex</div>
-            <Switch>
-                <Route path="/" exact component={Pokemons} />
-                <Route path="/pokemon/:name" component={Pokemon} />
-                <Redirect to="/" />
-            </Switch>
+            <main className="main">
+                <Switch>
+                    <Route path="/" exact component={Pokemons} />
+                    <Route path="/pokemon/:name" component={Pokemon} />
+                    <Redirect to="/" />
+                </Switch>
+            </main>
         </Provider>
     </Router>
 );

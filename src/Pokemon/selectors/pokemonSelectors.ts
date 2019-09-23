@@ -5,8 +5,11 @@ export const pokemonsResultsSelector = ({ pokemon }: AppState) => pokemon.pagina
 
 export const pokemonsPageSelector = ({ pokemon }: AppState) => pokemon.pagination.page;
 
-export const isLastPageSelector = ({ pokemon }: AppState) =>
-    pokemon.pagination.page === Math.floor(pokemon.pagination.count / paginationLimit);
+export const pokemonsTotalPagesSelector = ({ pokemon }: AppState) =>
+    Math.floor(pokemon.pagination.count / paginationLimit);
+
+export const isLastPageSelector = (state: AppState) =>
+    state.pokemon.pagination.page === pokemonsTotalPagesSelector(state);
 
 export const isFetchingSelector = ({ pokemon }: AppState) => pokemon.isFetching;
 

@@ -4,4 +4,4 @@ export enum Resource {
 
 export const pokeApiUrl = 'https://pokeapi.co/api/v2';
 
-export const paginationLimit = 20;
+export const paginationLimit = 12;
