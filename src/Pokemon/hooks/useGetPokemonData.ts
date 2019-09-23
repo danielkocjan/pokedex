@@ -28,6 +28,4 @@ export const useGetPokemonData = (name: string) => {
             getPokemonData(name);
         }
     }, [getPokemonData, name, pokemon]);
-
-    return { pokemon };
 };
