@@ -14,28 +14,33 @@
     background: $white-color;
 
     &__header {
+        position: relative;
         background: $pokeball-red-color;
-        border-bottom: 10px solid $border-color;
+        border-bottom: 0.5rem solid $border-color;
         border-radius: 6rem 6rem 0 0;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 2rem;
+        padding: 3rem 2rem;
+        font-size: 1.5rem;
+
+        &::after {
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            bottom: 0 - 1.25rem;
+            left: calc(50% - 1rem);
+            background: white;
+            border: 0.5rem solid $border-color;
+        }
     }
 
     &__name {
-        text-transform: capitalize;
-    }
-}
-
-.pokemon-stats {
-    &__stat {
-        border-bottom: 1px solid $gray-color;
-        width: 100%;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem 0;
         text-transform: capitalize;
     }
 }

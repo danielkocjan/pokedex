@@ -1,25 +1,16 @@
 @import './variables';
+@import './spinner';
 @import './pokemon';
 @import './pokemons';
 @import './pokemon-type';
+@import './pokemon-stats';
 
 body {
     font-size: 16px;
     font-family: $main-font;
 }
 
-.spinner {
-    width: 100%;
-    padding: 2rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 ul {
     list-style: none;
     padding: 0;
-}
-.header {
-    margin-bottom: 15vh;
 }

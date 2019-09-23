@@ -8,7 +8,6 @@ interface PokemonStat extends Name {
 
 export const PokemonStats: React.FC<{ stats: PokemonStat[] }> = ({ stats }) => (
     <>
-        <h2>Stats:</h2>
         <ul className="pokemon-stats">
             {stats.map(({ name, value }) => (
                 <li key={name} className="pokemon-stats__stat">
