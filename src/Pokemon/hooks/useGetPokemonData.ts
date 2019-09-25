@@ -1,31 +1,37 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as actions from '../actions/getPokemonDataActions';
+import * as actions from '../actions/pokemonActions';
 import { pokemonService } from '../../shared/services/rootService';
 import { pokemonDataSelector } from '../selectors/pokemonSelectors';
 import { AppState } from '../../shared/reducers/rootReducer';
 
-export const useGetPokemonData = (name: string) => {
+export const useGetPokemonData = (pokemonName: string) => {
+    const [fetchingStatus, setFetchingStatus] = useState(true);
+
     const dispatch = useDispatch();
 
     const getPokemonData = useCallback(
-        (name: string) => {
-            dispatch(actions.getPokemonDataRequest());
-
-            return pokemonService
+        (name: string) =>
+            pokemonService
                 .getPokemonData(name)
-                .then(pokemons => dispatch(actions.getPokemonDataSuccess(pokemons)))
-                .catch(() => dispatch(actions.getPokemonDataFailure()));
-        },
+                .then(pokemons => {
+                    dispatch(actions.getPokemonDataSuccess(pokemons));
+                    setFetchingStatus(false);
+                })
+                .catch(() => setFetchingStatus(false)),
         [dispatch]
     );
 
-    const pokemon = useSelector((state: AppState) => pokemonDataSelector(state, name));
+    const pokemonData = useSelector((state: AppState) => pokemonDataSelector(state, pokemonName));
 
     useEffect(() => {
-        if (!pokemon) {
-            getPokemonData(name);
+        if (pokemonData) {
+            return setFetchingStatus(false);
         }
-    }, [getPokemonData, name, pokemon]);
+
+        getPokemonData(pokemonName);
+    }, [getPokemonData, pokemonName, pokemonData]);
+
+    return { fetchingStatus, pokemonData };
 };

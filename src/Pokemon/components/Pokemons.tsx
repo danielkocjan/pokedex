@@ -5,17 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonSpriteByUrl } from '../../shared/helpers/helpers';
 import { Spinner } from '../../shared/components/Spinner';
 import { useGetPokemons } from '../hooks/useGetPokemons';
-import { setNextPage, setPreviousPage } from '../actions/getPokemonsActions';
+import { setNextPage, setPreviousPage } from '../actions/pokemonActions';
 import {
     isLastPageSelector,
     pokemonsTotalPagesSelector,
     pokemonsResultsSelector,
-    isFetchingSelector,
     pokemonsPageSelector,
 } from '../selectors/pokemonSelectors';
 
 export const Pokemons: React.FC = () => {
-    useGetPokemons();
+    const { fetchingStatus } = useGetPokemons();
 
     const dispatch = useDispatch();
     const nextPage = () => dispatch(setNextPage());
@@ -24,10 +23,9 @@ export const Pokemons: React.FC = () => {
     const isLastPage = useSelector(isLastPageSelector);
     const totalPages = useSelector(pokemonsTotalPagesSelector);
     const pokemons = useSelector(pokemonsResultsSelector);
-    const isFetching = useSelector(isFetchingSelector);
     const page = useSelector(pokemonsPageSelector);
 
-    return isFetching ? (
+    return fetchingStatus ? (
         <Spinner />
     ) : (
         <section>

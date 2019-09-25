@@ -6,36 +6,30 @@ import { PokemonTypes } from './PokemonTypes';
 import { PokemonStats } from './PokemonStats';
 import { useGetPokemonData } from '../hooks/useGetPokemonData';
 import { serializeStats, serializeTypes } from '../../shared/helpers/helpers';
-import { useSelector } from 'react-redux';
-import { pokemonDataSelector, isFetchingSelector } from '../selectors/pokemonSelectors';
-import { AppState } from '../../shared/reducers/rootReducer';
 
 type PokemonProps = RouteComponentProps<{ name: string }>;
 
 const PokemonContainer: React.FC<PokemonProps> = props => {
     const { name } = props.match.params;
 
-    useGetPokemonData(name);
+    const { fetchingStatus, pokemonData } = useGetPokemonData(name);
 
-    const pokemon = useSelector((state: AppState) => pokemonDataSelector(state, name));
-    const isFetching = useSelector(isFetchingSelector);
-
-    if (isFetching) {
+    if (fetchingStatus) {
         return <Spinner />;
     }
 
-    return pokemon ? (
+    return pokemonData ? (
         <section className="pokemon-card">
             <header className="pokemon-card__header">
                 <img
-                    src={pokemon.sprites.frontDefault}
-                    alt={pokemon.name}
+                    src={pokemonData.sprites.frontDefault}
+                    alt={pokemonData.name}
                     className="pokemon-card__img"
                 />
-                <h1 className="pokemon-card__name">{pokemon.name}</h1>
+                <h1 className="pokemon-card__name">{pokemonData.name}</h1>
             </header>
-            <PokemonTypes types={serializeTypes(pokemon.types)} />
-            <PokemonStats stats={serializeStats(pokemon.stats)} />
+            <PokemonTypes types={serializeTypes(pokemonData.types)} />
+            <PokemonStats stats={serializeStats(pokemonData.stats)} />
         </section>
     ) : (
         <div>No pokemon found</div>

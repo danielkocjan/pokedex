@@ -1,4 +1,4 @@
-import { PokemonAction } from '../../Pokemon/reducers/pokemonReducer';
+import { PokemonAction } from '../../Pokemon/actions/pokemonActions';
 
 export interface Action<T, P = null> {
     type: T;
