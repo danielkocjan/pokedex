@@ -12,14 +12,15 @@ export const useGetPokemonData = (pokemonName: string) => {
     const dispatch = useDispatch();
 
     const getPokemonData = useCallback(
-        (name: string) =>
-            pokemonService
-                .getPokemonData(name)
-                .then(pokemons => {
-                    dispatch(actions.getPokemonDataSuccess(pokemons));
-                    setFetchingStatus(false);
-                })
-                .catch(() => setFetchingStatus(false)),
+        async (name: string) => {
+            try {
+                const pokemon = await pokemonService.getPokemonData(name);
+
+                dispatch(actions.getPokemonDataSuccess(pokemon));
+            } finally {
+                setFetchingStatus(false);
+            }
+        },
         [dispatch]
     );
 

@@ -12,17 +12,15 @@ export const useGetPokemons = () => {
 
     const page = useSelector(pokemonsPageSelector);
 
-    const getPokemons = useCallback(
-        () =>
-            pokemonService
-                .getPokemons(page)
-                .then(pokemons => {
-                    dispatch(actions.getPokemonsSuccess(pokemons));
-                    setFetchingStatus(false);
-                })
-                .catch(() => setFetchingStatus(false)),
-        [dispatch, page]
-    );
+    const getPokemons = useCallback(async () => {
+        try {
+            const pokemons = await pokemonService.getPokemons(page);
+
+            dispatch(actions.getPokemonsSuccess(pokemons));
+        } finally {
+            setFetchingStatus(false);
+        }
+    }, [dispatch, page]);
 
     useEffect(() => {
         setFetchingStatus(true);
