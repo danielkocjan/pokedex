@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Spinner } from '../../shared/components/Spinner';
 import { PokemonTypes } from './PokemonTypes';
@@ -7,10 +7,12 @@ import { PokemonStats } from './PokemonStats';
 import { useGetPokemonData } from '../hooks/useGetPokemonData';
 import { serializeStats, serializeTypes } from '../../shared/helpers/helpers';
 
-type PokemonProps = RouteComponentProps<{ name: string }>;
+interface RouteProps {
+    name: string;
+}
 
-const PokemonContainer: React.FC<PokemonProps> = props => {
-    const { name } = props.match.params;
+export const Pokemon: React.FC = () => {
+    const { name } = useParams<RouteProps>();
 
     const { fetchingStatus, pokemonData } = useGetPokemonData(name);
 
@@ -35,5 +37,3 @@ const PokemonContainer: React.FC<PokemonProps> = props => {
         <div>No pokemon found</div>
     );
 };
-
-export const Pokemon = withRouter(PokemonContainer);

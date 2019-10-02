@@ -8,6 +8,7 @@ export class PokemonService {
 
     public getPokemons(page: number) {
         const url = `${Resource.Pokemon}${this.http.paginationParams(page)}`;
+
         return this.http.get<PaginatedResponse<Pokemon>>(url);
     }
 
