@@ -16,8 +16,9 @@ export const useGetPokemonData = (pokemonName: string) => {
             try {
                 const pokemon = await pokemonService.getPokemonData(name);
 
+                setFetchingStatus(false);
                 dispatch(actions.getPokemonDataSuccess(pokemon));
-            } finally {
+            } catch {
                 setFetchingStatus(false);
             }
         },

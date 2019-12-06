@@ -16,8 +16,9 @@ export const useGetPokemons = () => {
         try {
             const pokemons = await pokemonService.getPokemons(page);
 
+            setFetchingStatus(false);
             dispatch(actions.getPokemonsSuccess(pokemons));
-        } finally {
+        } catch {
             setFetchingStatus(false);
         }
     }, [dispatch, page]);

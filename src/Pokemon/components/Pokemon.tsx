@@ -7,12 +7,12 @@ import { PokemonStats } from './PokemonStats';
 import { useGetPokemonData } from '../hooks/useGetPokemonData';
 import { serializeStats, serializeTypes } from '../../shared/helpers/helpers';
 
-interface RouteProps {
+interface PokemonRouteParams {
     name: string;
 }
 
 export const Pokemon: React.FC = () => {
-    const { name } = useParams<RouteProps>();
+    const { name } = useParams<PokemonRouteParams>();
 
     const { fetchingStatus, pokemonData } = useGetPokemonData(name);
 
